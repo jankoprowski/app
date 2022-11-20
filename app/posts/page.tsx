@@ -1,5 +1,6 @@
 import PocketBase from 'pocketbase'
 import Link from 'next/link'
+import Form from "./createPost"
 
 export default async function  Page({ params }: {
     params: { id: number }
@@ -9,13 +10,12 @@ export default async function  Page({ params }: {
 
     const posts = await client.collection('posts').getFullList(200);
 
-    console.log(posts);
-
     return (<div>
         {posts.map((elem) => (<div>
                 <h2><Link href={`/posts/${elem.id}`}>{elem.title}</Link></h2>
                 <main>{elem.body}</main>
-            </div>))}
+            </div>))}            
+            <Form></Form>
     </div>
     )
 }
